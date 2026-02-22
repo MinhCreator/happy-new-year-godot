@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://1rlt0dw2kn2k"]
+
+[ext_resource type="Shader" uid="uid://t4ykjoi022k3" path="res://sky.gdshader" id="1_dptxg"]
+[ext_resource type="Script" uid="uid://cdyrrflju5pro" path="res://sun_and_moon.gd" id="2_py8sg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4krsh"]
+shader = ExtResource("1_dptxg")
+shader_parameter/coverage = 0.6
+shader_parameter/thickness = 55.0
+shader_parameter/absorption = 0.9
+shader_parameter/time_rate = 0.2
+
+[sub_resource type="Sky" id="Sky_xeklh"]
+sky_material = SubResource("ShaderMaterial_4krsh")
+
+[sub_resource type="Environment" id="Environment_lsyyi"]
+background_mode = 2
+sky = SubResource("Sky_xeklh")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="sky" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lsyyi")
+
+[node name="sun-and-moon" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.278991, 0.960294, 0, -0.960294, -0.278991, 0, 0, 0)
+shadow_enabled = true
+script = ExtResource("2_py8sg")

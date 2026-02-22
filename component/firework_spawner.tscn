@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://c2vh6nxvlalsh"]
+
+[ext_resource type="Script" uid="uid://daer4kscsve8e" path="res://script/firework_spawner.gd" id="1_0fh72"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bbinh"]
+albedo_color = Color(0.7682902, 0, 0.16463056, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gc5bh"]
+material = SubResource("StandardMaterial3D_bbinh")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0fh72"]
+albedo_color = Color(0.89302087, 0.092216514, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_penh5"]
+material = SubResource("StandardMaterial3D_0fh72")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_svet5"]
+size = Vector3(16.035706, 1, 16.10437)
+
+[node name="fireworkSpawner" type="Node3D"]
+script = ExtResource("1_0fh72")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+
+[node name="DebugRangepoint1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -7.9987564, 0, 7.9662557)
+mesh = SubResource("BoxMesh_gc5bh")
+
+[node name="DebugRangepoint2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -7.9987564, 0, -7.9319153)
+mesh = SubResource("BoxMesh_gc5bh")
+
+[node name="DebugRangepoint3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 8.069265, 0, -7.982735)
+mesh = SubResource("BoxMesh_penh5")
+
+[node name="DebugRangepoint4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 8.036764, 0, 7.9662557)
+mesh = SubResource("BoxMesh_gc5bh")
+
+[node name="DebugArea" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0.033050537, 0, -0.0025024414)
+shape = SubResource("BoxShape3D_svet5")
+debug_color = Color(1, 0, 0.12941177, 1)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.94
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

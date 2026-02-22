@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3 uid="uid://dtklelsrhiudx"]
+
+[ext_resource type="Script" uid="uid://cte4jalives85" path="res://addons/sk_fly_camera/src/fly_camera.gd" id="2_41ygk"]
+[ext_resource type="PackedScene" uid="uid://0tmwgorat6m3" path="res://playerIK_pre-Test.tscn" id="3_c1l4k"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_41ygk"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_c1l4k"]
+sky_material = SubResource("ProceduralSkyMaterial_41ygk")
+
+[sub_resource type="Environment" id="Environment_ldet7"]
+background_mode = 2
+sky = SubResource("Sky_c1l4k")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_ldet7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hvq65"]
+albedo_color = Color(0.15362772, 0.565621, 1.92523e-07, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_41ygk"]
+
+[node name="World" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ldet7")
+
+[node name="terrain" type="CSGMesh3D" parent="."]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0)
+use_collision = true
+mesh = SubResource("BoxMesh_ldet7")
+material = SubResource("StandardMaterial3D_hvq65")
+
+[node name="FlyCamera" type="CharacterBody3D" parent="."]
+script = ExtResource("2_41ygk")
+metadata/_custom_type_script = "uid://cte4jalives85"
+
+[node name="Player" parent="." instance=ExtResource("3_c1l4k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.0243177, 0.5, -1.383736)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.98, 0.135, -2.3771152)
+material = SubResource("StandardMaterial3D_41ygk")
